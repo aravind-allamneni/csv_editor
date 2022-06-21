@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block title %}
+CSV Data Editor
+{% endblock %}
+
+{% block content %}
+{% if data %}
+<div class="container">
+    <!-- csv data in a table -->
+    <table id="{{ table_name }}" class="table mt-2 table-striped" style="width: 100%; border: 1px solid black">
+        <thead>
+            <tr class="bg-secondary text-white">
+                {% for header in data[0].keys() %}
+                    <th scope="col">{{ header }}</th>
+                {% endfor %}
+                <th> Edit/Delete </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for id in range(0, data|length) %}
+                <tr id="{{ data[id]['index'] }}">
+                    {% for value in data[id].values() %}
+                    <td>{{ value }}
+                        <!--
+                        {% if loop.index0+1 == data[id].values()|length %}
+                        <button class="btn btn-primary mr-4">Edit</button>
+                        <button class="btn btn-danger mr-2">Delete</button>
+                        {% endif %}
+                        -->
+                    </td>
+                    {% endfor %}
+                    <td>
+                        <div class="col">
+                            <form action="/edit/{{ table_name }}/{{ id }}" method="POST">
+                                <button class="btn btn-primary">Edit</button>
+                            </form>
+                            <form action="/delete/{{ table_name }}/{{ data[id]['index'] }}" method="POST">
+                                <button class="btn btn-danger">X</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="col container form-group">
+    <h5>Add Item</h5>
+    <form class="my-4" method="POST" action="/add/{{ table_name }}">
+    <div class="col">
+    {% for  field in data[0].keys() %}
+    <!--
+        <label>{{ field }}</label>
+    -->
+        <input name="{{ field }}" type="text" placeholder="{{ field }}">
+    {% endfor %}
+    <input type="submit" class="btn btn-success float-right" value="Create"/>
+    </div>
+   </form>
+</div>
+{% else %}
+<div class="container">
+    <h3>
+        Select a CSV file to edit:
+    </h3>
+  
+    <form action="/" 
+        enctype="multipart/form-data" method="POST">
+        <label for="myfile">Select a file:</label>
+        <input type="file" id="mycsvfile" name="mycsvfile" />
+        <br /><br />
+        <input type="submit" class="btn btn-success" value="Upload"/>
+    </form>
+</div>
+{% endif%}
+
+{% endblock %}
