@@ -2,13 +2,10 @@
 # CSV FILE EDITOR APPLICATION
 #############################
 
-# Problem Statement
-Design a Web App that has the functionality to upload a CSV. Let’s say the CSV has fields Name, Age, Sex(M/F). The data inputted from CSV should be viewable in another page in a Tabular format with the option of editing existing entries. For each row in the tabular view, the user should be able to Edit/Delete Name, Age, Sex for each corresponding row entry.
+A Web App that has the functionality to upload a CSV. Let’s say the CSV has fields Name, Age, Sex(M/F). The data inputted from CSV should be viewable in another page in a Tabular format with the option of editing existing entries. For each row in the tabular view, the user should be able to Edit/Delete Name, Age, Sex for each corresponding row entry.
 
 # Database
-Option 1: Use an in-memory storage
-
-# Option 2: Even better if there is a minimal backend server to make API calls to a Database, could be a local instance, to store data uploaded via CSV and to make edit/delete queries from the Tabular View Page.
+An in-memory storage
 
 # required packages
 flask
